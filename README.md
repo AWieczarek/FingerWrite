@@ -10,7 +10,7 @@ It is the program which analyses your cam and draw on aplications such as Zoom o
 - [Adam Wieczarek (@AWieczarek)](https://github.com/AWieczarek)
 
 # Software
-Base on Pyhon libraries.
+Based on Pyhon libraries.
 
 # Requirements
 - Linux Debian or Windows 10
