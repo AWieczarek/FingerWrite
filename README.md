@@ -12,6 +12,8 @@ It is the program which analyses your cam and draw on aplications such as Zoom o
 
 # Software
 Based on Pyhon libraries.
+- PyGui
+- Cv5
 
 # Requirements
 - Linux Debian or Windows 10
