@@ -3,7 +3,7 @@ Finger writing during online lessons.
 
 
 # Idea
-It is the program which analyses your cam and draw on aplications such as Zoom or Microsoft Teams, which caould help studends or teachers, write more comfortable and readable than with mouse.
+It is the program which analyses your cam and draw on aplications such as Zoom or Microsoft Teams, which could help studends or teachers, write more comfortable and readable on screen than with mouse.
 
 # Our Team
 - [Jakub Delicat (@delipl)](https://github.com/delipl)
