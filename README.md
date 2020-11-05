@@ -12,7 +12,7 @@ It is the program which analyses your cam and draw on aplications such as Zoom o
 
 # Software
 Based on Pyhon libraries.
-- PyGui
+- PyAutoGui
 - OpenCV
 
 # Requirements
