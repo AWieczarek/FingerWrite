@@ -5,11 +5,12 @@ colour = 0
 while(1):
 
     _, frame = cap.read()
+    blurred_frame = cv.GaussianBlur(frame,(5,5), 0)
+    hsv = cv.cvtColor(blurred_frame, cv.COLOR_BGR2HSV)
 
-    hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     if colour == 0:
-        lower = np.array([70,86,0],np.uint8)
-        upper = np.array([121,255,255],np.uint8)
+        lower = np.array([94,80,0],np.uint8)
+        upper = np.array([102,255,255],np.uint8)
     elif colour == 1:
         lower = np.array([0,150,0],np.uint8)
         upper= np.array([10,255,255],np.uint8) 
@@ -19,6 +20,13 @@ while(1):
         
     mask = cv.inRange(hsv, lower, upper)    
     res = cv.bitwise_and(frame,frame, mask= mask)
+
+    contours,hierachy=cv.findContours(mask,cv.RETR_TREE,cv.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+        area = cv.contourArea(contour)
+        if area>1000:
+            cv.drawContours(frame, contours, -1, (255, 0, 0), 3)
+
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
     cv.imshow('res',res)
@@ -31,9 +39,6 @@ while(1):
     
     if cv.waitKey(1) & 0xFF == ord('g'):
         colour = 2
-
-    
-
 
     if cv.waitKey(5) & 0xFF == 27:
         break
