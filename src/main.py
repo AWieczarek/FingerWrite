@@ -1,29 +1,38 @@
 import cv2 as cv
 import numpy as np
 cap = cv.VideoCapture(0)
+colour = 0
 while(1):
-    # Take each frame
+
     _, frame = cap.read()
-    # Convert BGR to HSV
+
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    # define range of blue color in HSV
-    lower_blue = np.array([100,150,0],np.uint8)
-    upper_blue = np.array([120,255,255],np.uint8)
-
-    lower_red = np.array([0,150,0],np.uint8)
-    upper_red = np.array([10,255,255],np.uint8)
-
-    # Threshold the HSV image to get only blue colors
-    mask_blue = cv.inRange(hsv, lower_blue, upper_blue)
-    mask_red = cv.inRange(hsv, lower_red, upper_red)
-
-    # Bitwise-AND mask and original image
-
-    res_blue = cv.bitwise_and(frame,frame, mask= mask_blue)
-    res_red = cv.bitwise_and(frame,frame, mask= mask_red)
+    if colour == 0:
+        lower = np.array([70,86,0],np.uint8)
+        upper = np.array([121,255,255],np.uint8)
+    elif colour == 1:
+        lower = np.array([0,150,0],np.uint8)
+        upper= np.array([10,255,255],np.uint8) 
+    elif colour == 2:
+        lower = np.array([36,25,25],np.uint8)
+        upper= np.array([70,255,255],np.uint8) 
+        
+    mask = cv.inRange(hsv, lower, upper)    
+    res = cv.bitwise_and(frame,frame, mask= mask)
     cv.imshow('frame',frame)
-    cv.imshow('mask',mask_blue)
-    cv.imshow('res',res_blue)
+    cv.imshow('mask',mask)
+    cv.imshow('res',res)
+
+    if cv.waitKey(1) & 0xFF == ord('b'):
+            colour = 0
+
+    if cv.waitKey(1) & 0xFF == ord('r'):
+        colour = 1
+    
+    if cv.waitKey(1) & 0xFF == ord('g'):
+        colour = 2
+
+    
 
 
     if cv.waitKey(5) & 0xFF == 27:
