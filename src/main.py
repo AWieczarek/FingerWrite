@@ -36,6 +36,7 @@ while(1):
             cv.line(frame,(int(old_x+(w/2)),int(old_y+(h/2))),(int(x+(w/2)),int(y+(h/2))),(0,0,255),5)
             old_x = x
             old_y = y
+            pyautogui.dragTo(x,y, button='left')
             #print(x+(w/2),y+(h/2))
 
     cv.imshow('frame',frame)
