@@ -1,5 +1,7 @@
 import cv2 as cv
 import numpy as np
+import pyautogui
+
 cap = cv.VideoCapture(0)
 colour = 0
 old_x = 0
@@ -7,6 +9,7 @@ old_y = 0
 while(1):
 
     _, frame = cap.read()
+    frame = cv.flip(frame,1)
     blurred_frame = cv.GaussianBlur(frame,(5,5), 0)
     hsv = cv.cvtColor(blurred_frame, cv.COLOR_BGR2HSV)
 
