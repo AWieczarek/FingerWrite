@@ -2,6 +2,8 @@ import cv2 as cv
 import numpy as np
 cap = cv.VideoCapture(0)
 colour = 0
+old_x = 0
+old_y = 0
 while(1):
 
     _, frame = cap.read()
@@ -28,7 +30,10 @@ while(1):
             #cv.drawContours(frame, contours, -1, (255, 0, 0), 3)
             x, y, w, h = cv.boundingRect(contour) 
             frame = cv.rectangle(frame, (x, y),  (x + w, y + h),  (0, 0, 255), 2)
-            print(x+(w/2),y+(h/2))
+            cv.line(frame,(int(old_x+(w/2)),int(old_y+(h/2))),(int(x+(w/2)),int(y+(h/2))),(0,0,255),5)
+            old_x = x
+            old_y = y
+            #print(x+(w/2),y+(h/2))
 
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
