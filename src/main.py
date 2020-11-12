@@ -9,7 +9,7 @@ while(1):
     hsv = cv.cvtColor(blurred_frame, cv.COLOR_BGR2HSV)
 
     if colour == 0:
-        lower = np.array([94,80,0],np.uint8)
+        lower = np.array([70,80,0],np.uint8)
         upper = np.array([102,255,255],np.uint8)
     elif colour == 1:
         lower = np.array([0,150,0],np.uint8)
@@ -22,10 +22,13 @@ while(1):
     res = cv.bitwise_and(frame,frame, mask= mask)
 
     contours,hierachy=cv.findContours(mask,cv.RETR_TREE,cv.CHAIN_APPROX_SIMPLE)
-    for contour in contours:
+    for pic,contour in enumerate(contours):
         area = cv.contourArea(contour)
-        if area>1000:
-            cv.drawContours(frame, contours, -1, (255, 0, 0), 3)
+        if area>300:
+            #cv.drawContours(frame, contours, -1, (255, 0, 0), 3)
+            x, y, w, h = cv.boundingRect(contour) 
+            frame = cv.rectangle(frame, (x, y),  (x + w, y + h),  (0, 0, 255), 2)
+            print(x+(w/2),y+(h/2))
 
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
