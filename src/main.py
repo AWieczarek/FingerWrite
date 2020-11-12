@@ -1,6 +1,20 @@
 import cv2 as cv
 import numpy as np
+
+cv.namedWindow('frame')
+
 cap = cv.VideoCapture(0)
+
+def getMouse(event, x, y, flags, param):
+    if event == cv.EVENT_LBUTTONDOWN:
+        # list of selected coulours
+        print(frame[y,x,0])
+        colorsB = frame[y,x,0]
+        colorsG = frame[y,x,1]
+        colorsR = frame[y,x,2]
+
+
+cv.setMouseCallback('frame', getMouse)
 colour = 0
 while(1):
 
@@ -24,7 +38,7 @@ while(1):
     cv.imshow('res',res)
 
     if cv.waitKey(1) & 0xFF == ord('b'):
-            colour = 0
+        colour = 0
 
     if cv.waitKey(1) & 0xFF == ord('r'):
         colour = 1
